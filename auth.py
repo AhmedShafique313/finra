@@ -1,25 +1,19 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-# FINRA token endpoint
-token_url = "https://api.finra.org/token"  # standard OAuth2 endpoint
+# Correct FIP OAuth token endpoint
+token_url = "https://ews.fip.finra.org/fip/rest/ews/oauth2/access_token?grant_type=client_credentials"
 
 # Your credentials
-client_id = "c9b2371079914c4dbf63"
-client_secret = "@Skibidi123456"
+client_id = "fake"
+client_secret = "fake"
 
-# Payload for client credentials grant
-payload = {
-    "grant_type": "client_credentials"
-}
-
-# Request access token
-response = requests.post(token_url, data=payload, auth=HTTPBasicAuth(client_id, client_secret))
+response = requests.post(token_url, auth=HTTPBasicAuth(client_id, client_secret))
 
 if response.status_code == 200:
     token_data = response.json()
-    access_token = token_data.get("access_token")
-    print("✅ Access token received:", access_token)
+    access_token = token_data["access_token"]
+    print("✅ Access Token:", access_token)
 else:
-    print("❌ Failed to get access token")
+    print("❌ Failed to get token")
     print(response.status_code, response.text)

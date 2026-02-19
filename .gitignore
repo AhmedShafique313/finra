@@ -1,1 +1,6 @@
 venv/
+alerts.py
+alerts1.py
+allegations.py
+auth.py
+auth1.py
